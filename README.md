@@ -1,4 +1,4 @@
-# runcursorrun
+# Run Cursor Run
 
 WIP
 
