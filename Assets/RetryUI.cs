@@ -12,6 +12,11 @@ public class RetryUI : MonoBehaviour
         ReloadScene();
     }
 
+    public void OnQuitButtonClicked()
+    {
+        SceneManager.LoadScene(0); // currently main menu
+    }
+
     private void ReloadScene()
     {
         Time.timeScale = 1;

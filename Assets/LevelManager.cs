@@ -33,8 +33,11 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
+        _targetPlayer.SetActive(true);
         var spawner = Instantiate(_enemySpawnerPrefab);
         spawner.TargetPlayer = _targetPlayer;
+        Debug.Log("STARTTTTTTTTTTTTTTT");
     }
 
     private void ShowRetryUI()

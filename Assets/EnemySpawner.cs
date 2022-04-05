@@ -25,8 +25,14 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
+        gameObject.SetActive(true);
         SetBorder();
+        // TODO: fix invoke not spawning when re entering the game from main menu
         InvokeRepeating(nameof(SpawnEnemy), 0.01f, 1f);
+        if (_targetPlayer != null)
+        {
+            Debug.Log("palyer not null");
+        }
     }
 
     private void SetBorder()
@@ -64,7 +70,8 @@ public class EnemySpawner : MonoBehaviour
         else
         {
             // TODO: fix this part of code
-            Destroy(gameObject);
+            CancelInvoke(nameof(SpawnEnemy));
+            gameObject.SetActive(false);
         }
     }
 

@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
         if (_playerHealth <= 0)
         {
             PlayerDiedEvent?.Invoke();
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
