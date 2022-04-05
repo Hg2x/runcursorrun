@@ -54,6 +54,7 @@ public class LevelManager : MonoBehaviour
         _targetPlayer.SetActive(true);
         var spawner = Instantiate(_enemySpawnerPrefab);
         spawner.TargetPlayer = _targetPlayer;
+        spawner.SpawnTimer = 1f; // TODO: change later to scale with time
 
         _pauseUI = Instantiate(_pauseUIPrefab, _canvas.transform);
         _pauseUI.SetActive(false);
@@ -68,9 +69,13 @@ public class LevelManager : MonoBehaviour
     private void OnPauseClicked(InputAction.CallbackContext context)
     {
         // move pause and resume button to a unified script
-        if (_pauseUI.activeSelf != true)
+        if (_pauseUI.activeSelf == false)
         {
             PauseGame();
+        }
+        else
+        {
+            ResumeGame();
         }
     }
 
@@ -78,5 +83,11 @@ public class LevelManager : MonoBehaviour
     {
         _pauseUI.SetActive(true);
         Time.timeScale = 0; // TODO: impelement a better way to pause the game
+    }
+
+    private void ResumeGame()
+    {
+        _pauseUI.SetActive(false);
+        Time.timeScale = 1;
     }
 }

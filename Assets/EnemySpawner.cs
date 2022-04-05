@@ -11,8 +11,11 @@ public class EnemySpawner : MonoBehaviour
     public GameObject TargetPlayer{ get { return _targetPlayer; } set{ _targetPlayer = value; } }
     private GameObject _targetPlayer;
 
+    public float SpawnTimer { get { return _spawnTimer; } set { _spawnTimer = value; } }
+    private float _spawnTimer;
+
     [SerializeField]
-    private GameObject _enemyToSpawn;
+    private GameObject[] _enemyToSpawn; // maybe change to list
 
     private List<Vector3> _spawnBorderCoordinates;
 
@@ -28,7 +31,7 @@ public class EnemySpawner : MonoBehaviour
         gameObject.SetActive(true);
         SetBorder();
         // TODO: fix invoke not spawning when re entering the game from main menu
-        InvokeRepeating(nameof(SpawnEnemy), 0.01f, 1f);
+        StartCoroutine(SpawnEnemyCoroutine());
         if (_targetPlayer != null)
         {
             Debug.Log("palyer not null");
@@ -53,10 +56,10 @@ public class EnemySpawner : MonoBehaviour
         _innerYBorder = (_spawnBorderCoordinates[2].y, _spawnBorderCoordinates[1].y);
     }
 
-    private void SpawnEnemy()
+    private void SpawnEnemy(GameObject enemyGameObject)
     {
         _spawnPosition = GenerateSpawnLocation();
-        var enemy = Instantiate(_enemyToSpawn, _spawnPosition, Quaternion.identity);
+        var enemy = Instantiate(enemyGameObject, _spawnPosition, Quaternion.identity);
         enemy.transform.SetParent(transform);
         Debug.Log(_spawnPosition);
 
@@ -70,8 +73,17 @@ public class EnemySpawner : MonoBehaviour
         else
         {
             // TODO: fix this part of code
-            CancelInvoke(nameof(SpawnEnemy));
+            StopCoroutine(SpawnEnemyCoroutine());
             gameObject.SetActive(false);
+        }
+    }
+
+    private IEnumerator SpawnEnemyCoroutine()
+    {
+        while (true)
+        {
+            SpawnEnemy(_enemyToSpawn[Random.Range(0, _enemyToSpawn.Length)]);
+            yield return new WaitForSeconds(_spawnTimer);
         }
     }
 

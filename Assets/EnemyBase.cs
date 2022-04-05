@@ -11,12 +11,10 @@ public abstract class EnemyBase : MonoBehaviour
     private UnitType _type = UnitType.Enemy;
 
     [SerializeField]
-    public int damageAmount = 1;
+    protected int damageAmount = 1;
 
-    [Range(1f, 50f)][SerializeField]
+    [Range(0.1f, 50f)][SerializeField]
     protected float speedMultiplier = 1f;
-
-    public float speed = 1;
 
     public Vector3 Direction { get { return direction; } set { direction = value; } }
     protected Vector3 direction;
@@ -27,7 +25,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void Update()
     {
-        transform.Translate(direction * speedMultiplier * Time.deltaTime * speed);
+        transform.Translate(direction * speedMultiplier * Time.deltaTime);
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)

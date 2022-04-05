@@ -112,8 +112,9 @@ MonoBehaviour:
   - {fileID: 6154192709274003300}
   - {fileID: 6154192708616846919}
   - {fileID: 6154192709113481820}
-  _targetPlayer: {fileID: 0}
-  _enemyToSpawn: {fileID: 5004312567851292847, guid: ca8e21cc568d83a45b6f107e45bfbb43, type: 3}
+  _enemyToSpawn:
+  - {fileID: 5004312567851292847, guid: ca8e21cc568d83a45b6f107e45bfbb43, type: 3}
+  - {fileID: 5004312567851292847, guid: 6968de35a29d4d74c9fa4baee4ab775e, type: 3}
 --- !u!1 &6154192709113481820
 GameObject:
   m_ObjectHideFlags: 0
