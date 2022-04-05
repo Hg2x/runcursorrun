@@ -12,7 +12,7 @@ public class RetryUI : MonoBehaviour
         ReloadScene();
     }
 
-    public void OnQuitButtonClicked()
+    public void OnQuitButtonClicked() // inspector referenced
     {
         SceneManager.LoadScene(0); // currently main menu
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LevelManager : MonoBehaviour
 {
@@ -16,28 +17,46 @@ public class LevelManager : MonoBehaviour
     private EnemySpawner _enemySpawnerPrefab;
 
     [SerializeField]
+    private Canvas _canvas;
+
+    [SerializeField]
+    private GameObject _pauseUIPrefab;
+
+    [SerializeField]
     private GameObject _retryUI;
 
     [SerializeField]
     private GameObject _targetPlayer;
 
+    private PlayerInputAction _playerInput;
+
+    private GameObject _pauseUI;
+
     private void OnEnable()
     {
+        _playerInput = new PlayerInputAction();
+        _playerInput.Enable();
+        _playerInput.Default.Pause.performed += OnPauseClicked;
         Player.PlayerDiedEvent += ShowRetryUI;
     }
 
     private void OnDisable()
     {
+        _playerInput.Disable();
+        _playerInput.Default.Pause.performed -= OnPauseClicked;
         Player.PlayerDiedEvent -= ShowRetryUI;
     }
 
     private void Start()
     {
         Time.timeScale = 1;
+
         _targetPlayer.SetActive(true);
         var spawner = Instantiate(_enemySpawnerPrefab);
         spawner.TargetPlayer = _targetPlayer;
-        Debug.Log("STARTTTTTTTTTTTTTTT");
+
+        _pauseUI = Instantiate(_pauseUIPrefab, _canvas.transform);
+        _pauseUI.SetActive(false);
     }
 
     private void ShowRetryUI()
@@ -46,8 +65,18 @@ public class LevelManager : MonoBehaviour
         PauseGame();
     }
 
+    private void OnPauseClicked(InputAction.CallbackContext context)
+    {
+        // move pause and resume button to a unified script
+        if (_pauseUI.activeSelf != true)
+        {
+            PauseGame();
+        }
+    }
+
     private void PauseGame()
     {
+        _pauseUI.SetActive(true);
         Time.timeScale = 0; // TODO: impelement a better way to pause the game
     }
 }
