@@ -61,13 +61,14 @@ public class EnemySpawner : MonoBehaviour
         _spawnPosition = GenerateSpawnLocation();
         var enemy = Instantiate(enemyGameObject, _spawnPosition, Quaternion.identity);
         enemy.transform.SetParent(transform);
-        Debug.Log(_spawnPosition);
+        //Debug.Log(_spawnPosition);
 
         if (_targetPlayer != null)
         {
             var direction = _targetPlayer.transform.position - enemy.transform.position;
             direction.Normalize();
             enemy.GetComponent<EnemyBase>().Direction = direction;
+            //Debug.Log(direction + "direction");
             //transform.Rotate(0f, 0f, Random.Range(0.0f, 360.0f)); // find a better way to rotate without fucking up walking direction
         }
         else

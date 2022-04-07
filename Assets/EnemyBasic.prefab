@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5004312567851292844}
   - component: {fileID: 5004312567851292845}
   - component: {fileID: 5004312567851292846}
-  - component: {fileID: 5137273012649049607}
+  - component: {fileID: 2190337465575148767}
   m_Layer: 0
   m_Name: EnemyBasic
   m_TagString: Untagged
@@ -132,7 +132,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5137273012649049607
+--- !u!114 &2190337465575148767
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5004312567851292847}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f196b494efebf94e9554675d3a64731, type: 3}
+  m_Script: {fileID: 11500000, guid: ec9523d4817ebe44d8f2966724311d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 1

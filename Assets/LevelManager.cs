@@ -28,6 +28,9 @@ public class LevelManager : MonoBehaviour
     private GameObject _retryUI;
 
     [SerializeField]
+    private GameObject _stageClearUI;
+
+    [SerializeField]
     private GameObject _targetPlayer;
 
     private PlayerInputAction _playerInput;
@@ -103,6 +106,8 @@ public class LevelManager : MonoBehaviour
 
     private void TimerDone()
     {
+        Instantiate(_stageClearUI, _canvasTransform);
+        Time.timeScale = 0;
         UnityEngine.Debug.Log("STAGE CLEARRRRRRRRRRRRRRRRRRRR");
         // stage clear if stage is timer type
     }
@@ -110,7 +115,7 @@ public class LevelManager : MonoBehaviour
     private void PauseGame()
     {
         _pauseUI.SetActive(true);
-        Time.timeScale = 0; // TODO: impelement a better way to pause the game
+        Time.timeScale = 0; // TODO: impelement a better way to pause the game, also fix cursor still running when game = paused
     }
 
     private void ResumeGame()

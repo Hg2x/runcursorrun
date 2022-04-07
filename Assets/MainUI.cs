@@ -17,7 +17,7 @@ public class MainUI : MonoBehaviour
     public void StartTimer()
     {
         int minutes = 0; // from LevelManager
-        int seconds = 10;
+        int seconds = 30;
         _timerUI.StartTimer(minutes, seconds);
     }
 

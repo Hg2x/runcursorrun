@@ -16,13 +16,12 @@ public class TimerUI : MonoBehaviour
 
     protected bool timerIsOn;
 
-    protected int minutes = 0;
-    protected int seconds = 0;
-
     protected TimeSpan totalDuration;
 
     public void StartTimer(int timerMinutes, int timerSeconds)
     {
+        int minutes = 0, seconds = 0;
+
         if (timerMinutes > 0)
         {
             minutes = timerMinutes;

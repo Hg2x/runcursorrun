@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f457b2f35486ca348ae740f420b7c2a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerHealth: 5
+  _playerHealth: 10
 --- !u!212 &211849942
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1004,6 +1004,7 @@ MonoBehaviour:
   _canvas: {fileID: 438166432}
   _pauseUIPrefab: {fileID: 6458328606983403488, guid: 3d0ce64190d96bb458a6eda9848ac0b2, type: 3}
   _retryUI: {fileID: 6458328606983403488, guid: ef541b9e61e86af41aa0f3e4f6cdea9e, type: 3}
+  _stageClearUI: {fileID: 6458328606983403488, guid: 050c6c4786baae349a64eb0ce9620aa0, type: 3}
   _targetPlayer: {fileID: 211849940}
 --- !u!4 &610116024
 Transform:

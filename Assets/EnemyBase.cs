@@ -16,10 +16,17 @@ public abstract class EnemyBase : MonoBehaviour
     [Range(0.1f, 50f)][SerializeField]
     protected float speedMultiplier = 1f;
 
-    public Vector3 Direction { get { return direction; } set { direction = value; } }
-    protected Vector3 direction;
+    protected Rigidbody2D rigidbody2d;
+
+    public Vector2 Direction { get { return direction; } set { direction = value; } }
+    protected Vector2 direction;
 
     protected virtual void Start()
+    {
+        rigidbody2d = GetComponent<Rigidbody2D>();
+    }
+
+    protected virtual void FixedUpdate()
     {
     }
 
