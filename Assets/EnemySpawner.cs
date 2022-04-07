@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
-{
+{ // TODO: maybe use object pooling here
     [SerializeField]
     private GameObject[] _spawnBorder; // point 1,2,3,4. Has to be in taht order
 

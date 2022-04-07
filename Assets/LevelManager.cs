@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -32,12 +34,15 @@ public class LevelManager : MonoBehaviour
 
     private GameObject _pauseUI;
 
+    private EnemySpawner _spawner;
+
     private void OnEnable()
     {
         _playerInput = new PlayerInputAction();
         _playerInput.Enable();
         _playerInput.Default.Pause.performed += OnPauseClicked;
         Player.PlayerDiedEvent += ShowRetryUI;
+        TimerUI.TimerDoneEvent += TimerDone;
     }
 
     private void OnDisable()
@@ -45,6 +50,7 @@ public class LevelManager : MonoBehaviour
         _playerInput.Disable();
         _playerInput.Default.Pause.performed -= OnPauseClicked;
         Player.PlayerDiedEvent -= ShowRetryUI;
+        TimerUI.TimerDoneEvent -= TimerDone;
     }
 
     private void Start()
@@ -52,12 +58,28 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 1;
 
         _targetPlayer.SetActive(true);
-        var spawner = Instantiate(_enemySpawnerPrefab);
-        spawner.TargetPlayer = _targetPlayer;
-        spawner.SpawnTimer = 1f; // TODO: change later to scale with time
+        _spawner = Instantiate(_enemySpawnerPrefab);
+        _spawner.TargetPlayer = _targetPlayer;
+        _spawner.SpawnTimer = 1f;
+        StartCoroutine(SpawnTimerAdjustment());
 
         _pauseUI = Instantiate(_pauseUIPrefab, _canvas.transform);
         _pauseUI.SetActive(false);
+    }
+
+    private void Update()
+    {
+        
+    }
+
+    private IEnumerator SpawnTimerAdjustment()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(10f);
+            _spawner.SpawnTimer /= 1.5f;
+            UnityEngine.Debug.Log("Spawn time became faster");
+        }
     }
 
     private void ShowRetryUI()
@@ -77,6 +99,12 @@ public class LevelManager : MonoBehaviour
         {
             ResumeGame();
         }
+    }
+
+    private void TimerDone()
+    {
+        UnityEngine.Debug.Log("STAGE CLEARRRRRRRRRRRRRRRRRRRR");
+        // stage clear if stage is timer type
     }
 
     private void PauseGame()

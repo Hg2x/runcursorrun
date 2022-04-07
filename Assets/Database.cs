@@ -18,3 +18,4 @@ public class ObjectType
 public delegate void DealDamage(int damage);
 public delegate void SendPlayerStats(int playerHP);
 public delegate void PlayerDied();
+public delegate void TimerDone();
